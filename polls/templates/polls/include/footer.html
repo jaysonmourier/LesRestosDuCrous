@@ -6,6 +6,10 @@
       </a>
       <span class="text-muted">© 2021 Company, Inc</span>
     </div>
+    {% if request.user.is_authenticated %}
+    <span class="text-muted"><a href="/manager/logout/">Déconnexion</a></span>
+    {% else %}
     <span class="text-muted">Vous êtes gestionnaire ? <a href='/manager/login'>cliquez ici</a></span>
+    {% endif %}
   </footer>
 </div>
