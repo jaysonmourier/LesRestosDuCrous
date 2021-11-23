@@ -5,5 +5,17 @@
 {% block body %}
 {% include 'polls/include/nav.html' %}
 
+<div class="container">
+    {% if error_message %}
+    <div class="alert alert-danger" role="alert">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+    <form>
+        {% csrf_token %}
+    </form>
+</div>
+
 {% include 'polls/include/footer.html' %}
 {%endblock%}
