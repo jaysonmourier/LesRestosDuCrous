@@ -1,4 +1,7 @@
 LesRestosDuCrous/__pycache__
 polls/__pycache__
+polls/migrations/__pycache__
 account/__pycache__
 manager/__pycache__
+user/__pycache__
+user/migrations/__pycache__

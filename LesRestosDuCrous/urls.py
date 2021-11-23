@@ -24,5 +24,5 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('polls.urls')),
     path('account/', include('account.urls')),
-    #path('manager/', include('manager.urls')),
+    path('manager/', include('manager.urls')),
 ]
