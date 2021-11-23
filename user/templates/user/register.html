@@ -11,9 +11,22 @@
         {{ error_message }}
     </div>
     {% endif %}
-
-    <form>
+    <form action="/user/register/" method="POST">
         {% csrf_token %}
+        <div class="mb-3 fieldWrapper">
+            <label for="{{ form.first_name.id_for_label }}" class="form-label">Prénom</label>
+            {{ form.first_name }}
+        </div>
+        <div class="mb-3 fieldWrapper">
+            <label for="{{ form.last_name.id_for_label }}" class="form-label">Nom</label>
+            {{ form.last_name }}
+        </div>
+        <div class="mb-3 fieldWrapper">
+            <label for="{{ form.email.id_for_label }}" class="form-label">Adresse email</label>
+            {{ form.email }}
+            <div id="{{ form.email.id_for_label }}" class="form-text">Nous ne partagerons jamais votre adresse email.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
 
