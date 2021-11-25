@@ -5,10 +5,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import LoginForm 
 
 @login_required(redirect_field_name=None)
-def index(request) -> render:
+def index(request):
     return render(request, "manager/index.html")
 
-def loginPage(request) -> render:
+def loginPage(request):
 
     error_login = None
 
@@ -34,6 +34,6 @@ def loginPage(request) -> render:
     return render(request, "manager/login.html", {'form': loginForm, 'error_login': error_login})
 
 @login_required(redirect_field_name=None)
-def logoutPage(request) -> render:
+def logoutPage(request):
     logout(request)
     return redirect("/")

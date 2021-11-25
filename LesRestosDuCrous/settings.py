@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'polls',
     'manager',
     'user',
-    'categorie'
+    'categorie',
+    'product'
 ]
 
 MIDDLEWARE = [

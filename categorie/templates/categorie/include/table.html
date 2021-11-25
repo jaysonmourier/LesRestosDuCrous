@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    {% for entrie in entries %}
+    {% for categorie in page_obj %}
     <tr>
-        <td><img src="{{ entrie.image }}" width="50" heigth="50"></td>
-        <td>{{ entrie.nom }}</td>
-        <td>{{ entrie.unite }}</td>
+        <td><img src="{{ categorie.image }}" width="50" heigth="50"></td>
+        <td>{{ categorie.nom }}</td>
+        <td>{{ categorie.unite }}</td>
         <td>
-        <a href="/categorie/delete/{{ entrie.id }}">
+        <a href="/categorie/delete/{{ categorie.id }}">
         <button type="button" class="btn btn-danger">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                     <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>

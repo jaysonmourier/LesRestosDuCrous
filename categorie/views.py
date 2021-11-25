@@ -1,8 +1,9 @@
-from django.forms.formsets import formset_factory
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.forms import formset_factory
+from django.core.paginator import Paginator
+
+from math import ceil
 
 from .forms import CategorieForm
 from .models import Categorie
@@ -10,14 +11,14 @@ from .models import Categorie
 @login_required(redirect_field_name=None)
 def delete(request, id):
     Categorie.objects.all().filter(id=id).delete()
-    return redirect("/categorie/")
+    return redirect(f"/categorie/")
 
 @login_required(redirect_field_name=None)
-def index(request) -> render:
+def index(request, page=1):
+    # POST query processing
     if request.method == "POST":
         categorieForm = CategorieForm(request.POST)
-        formset = formset_factory(request.POST, request.FILES)
-        if categorieForm.is_valid() and formset.is_valid():
+        if categorieForm.is_valid():
             categorie = Categorie()
             categorie.nom = categorieForm.cleaned_data['nom']
             # default value
@@ -27,14 +28,12 @@ def index(request) -> render:
                 categorie.save()
             except IntegrityError:
                 redirect("/categorie/")
-
-        else:
-            print("[LOG] invalid form!")
     else:
         categorieForm = CategorieForm()
-    
-    all_entries = Categorie.objects.all().filter().order_by('-id')
-    
-    counter = all_entries.count()
 
-    return render(request, "categorie/index.html", {"form": categorieForm, "count": counter, "entries": all_entries})
+    # pagination
+    all_entries = Categorie.objects.all().filter().order_by('-id')    
+    paginator = Paginator(all_entries, 5)
+    page_obj = paginator.get_page(page)
+
+    return render(request, "categorie/index.html", {"form": categorieForm, "page_obj": page_obj})
