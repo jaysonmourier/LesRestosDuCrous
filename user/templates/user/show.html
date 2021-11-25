@@ -11,17 +11,14 @@
     {% include 'manager/include/header.html' %}
 
     <div class="categories_show my-5">
-    
-    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-        <h1 class="display-4 fw-normal">En attente de confirmation</h1>
-    </div>
 
-    {% if count < 1 %}
+    {% if not beneficiaire %}
     <p class="text-muted text-center">
-        Il n'y a aucune demande de bénéficiaire.
+        Ce bénéficiaire n'existe pas!
     </p>    
     {% else %}
-    {% include 'user/include/table.html'   %}
+    {% include 'user/include/information_beneficiaire.html'   %}
+    {% include 'user/include/decision.html' %}
     {% endif %}                 
     
     </div>

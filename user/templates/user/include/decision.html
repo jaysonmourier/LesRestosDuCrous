@@ -1,0 +1,6 @@
+<div>
+{% if not beneficiaire.validated %}
+<a href="/user/confirm/{{ beneficiaire.id }}"><button type="button" class="btn btn-success">Valider</button></a>
+{% endif %}
+<a href="/user/delete/{{ beneficiaire.id }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+</div>

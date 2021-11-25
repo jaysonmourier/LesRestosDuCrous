@@ -1,0 +1,43 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Téléphone</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Tranche d'âge</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+        <td>{{ beneficiaire.nom }}</td>
+        <td>{{ beneficiaire.prenom }}</td>
+        <td>{{ beneficiaire.email }}</td>
+        <td>{{ beneficiaire.telephone }}</td>
+        <td>{{ beneficiaire.adresse }}</td>        
+        <td>{{ beneficiaire.nbParts }}</td>        
+    </tr>
+  </tbody>
+</table>
+
+{% if beneficiaire.motMairie %}
+<p>{{ beneficiaire.prenom }} est inscrit à la mairie.</p>
+{% endif %}
+
+{% if beneficiaire.presenceDistribution %}
+<p>{{ beneficiaire.prenom }} sera présent aux distributions le samedi.</p>
+{% else %}
+<p>{{ beneficiaire.prenom }} ne sera pas présent aux distributions le samedi.</p>
+{% endif %}
+
+{% if beneficiaire.carteDonnee %}
+<p>Carte donnée : OUI</p>
+{% else %}
+<p>Carte donnée : NON</p>
+{% endif %}
+
+{% if beneficiaire.remarque %}
+<p class="mt-5">Remarque du bénéficiaire :</p>
+<p>{{ beneficiaire.remarque }}</p>
+{% endif %}

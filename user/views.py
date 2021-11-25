@@ -6,11 +6,28 @@ from .forms import UserForm
 from .models import Beneficiaire
 
 @login_required(redirect_field_name=None)
-def show_unconfirmed(request, page):
+def show_unique_user(request, id):
+    try:
+        beneficiaire = Beneficiaire.objects.get(id=id)
+    except:
+        # TO DO : USER NOT FOUND
+        beneficiaire = None
+    return render(request, "user/show.html", {"beneficiaire": beneficiaire})
+
+@login_required(redirect_field_name=None)
+def show_all_unconfirmed(request, page=1):
     beneficiaires = Beneficiaire.objects.all().filter(validated=0)
     paginator = Paginator(beneficiaires, 5)
     beneficiaires_obj = paginator.get_page(page)
-    return render(request, "user/show_unconfirmed.html", {"beneficiaire_obj": beneficiaires_obj})
+    return render(request, "user/show_unconfirmed.html", {"beneficiaire_obj": beneficiaires_obj, "count": paginator.count})
+
+@login_required(redirect_field_name=None)
+def show_all_confirmed(request, page=1):
+    beneficiaires = Beneficiaire.objects.all().filter(validated=1)
+    paginator = Paginator(beneficiaires, 5)
+    beneficiaires_obj = paginator.get_page(page)
+    return render(request, "user/show_confirmed.html", {"beneficiaire_obj": beneficiaires_obj, "count": paginator.count})
+
 
 def register(request):
     info_message = None
@@ -47,3 +64,25 @@ def register(request):
         userForm = UserForm()
     
     return render(request, "user/register.html", {'form': userForm, 'message': info_message, 'type': info_type})
+
+@login_required(redirect_field_name=None)
+def confirm(request, id):
+    try:
+        beneficiaire = Beneficiaire.objects.get(id=id)
+        beneficiaire.validated = True
+        beneficiaire.save()
+        return redirect("/user/all")
+    except:
+        # TO DO : USER NOT FOUND
+        beneficiaire = None
+    return redirect("/")
+
+@login_required(redirect_field_name=None)
+def delete(request, id):
+    try:
+        beneficiaire = Beneficiaire.objects.all().filter(id=id)
+        beneficiaire.delete()
+    except:
+        # TO DO : USER NOT FOUND
+        beneficiaire = None
+    return redirect("/")
