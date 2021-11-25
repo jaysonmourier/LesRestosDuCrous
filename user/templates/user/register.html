@@ -5,7 +5,16 @@
 {% block body %}
 {% include 'polls/include/nav.html' %}
 
+
+<div class="container" style="max-width: 600px;">
+
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Les demandes</h1>
+    <p class="fs-5 text-muted">Chaque demande est analysé par un administrateur qui se permettra de valider ou décliner votre demande. Vous pouvez réiterer une demande refusée.</p>
+</div>
+
 {% include 'user/include/form.html' %}
 
+</div>
 {% include 'polls/include/footer.html' %}
 {%endblock%}

@@ -1,23 +1,52 @@
-<div class="container">
-    <form action="/user/" method="POST">
+
+{% if type %}
+<div class="alert alert-{{ type }}" role="alert">
+{{ message }}
+</div>
+{% endif %}
+<form action="/user/register/" method="POST">
     {% load widget_tweaks %}
     {% csrf_token %}
-    <div class="form-group my-1">
-        <label for="id_nom">Votre nom :</label>
-        {{ form.nom|add_class:"form-control" }}
-    </div>
-    <div class="form-group my-1">
-        <label for="id_nom">Votre prénom :</label>
-        {{ form.prenom|add_class:"form-control" }}
-    </div> 
-    <div class="form-group my-1">
-        <label for="id_nom">Votre adresse email :</label>
-        {{ form.email|add_class:"form-control" }}
-        <div id="id_email" class="form-text">Nous ne partagerons jamais votre adresse email.</div>
-    </div>
-    <div class="form-group my-1">
-        <label for="id_nom">Votre numéro de téléphone :</label>
-        {% render_field form.telephone type="tel" class="form-control" placeholder="0601020304" %}
-    </div> 
-    </form>
-</div>
+        <div class="form-group my-1">
+            <label for="id_nom">Votre nom* :</label>
+            {{ form.nom|add_class:"form-control" }}
+        </div>
+        <div class="form-group my-1">
+            <label for="id_nom">Votre prénom* :</label>
+            {{ form.prenom|add_class:"form-control" }}
+        </div> 
+        <div class="form-group my-1">
+            <label for="id_nom">Votre adresse email* :</label>
+            {{ form.email|add_class:"form-control" }}
+            <div id="id_email" class="form-text">Nous ne partagerons jamais votre adresse email.</div>
+        </div>
+        <div class="form-group my-1">
+            <label for="id_nom">Votre numéro de téléphone* :</label>
+            {% render_field form.telephone type="tel" class="form-control" placeholder="0601020304" %}
+        </div>
+        <div class="form-group my-1">
+            <label for="id_nom">Votre adresse* :</label>
+            {{ form.adresse|add_class:"form-control" }}
+        </div>
+        <div class="form-group my-1">
+            <label for="id_nom">Tranche d'âge du bénéficiaire* :</label>
+            {{ form.nbParts|add_class:"form-control" }}
+        </div>
+        <div class="form-check my-1">
+            <label class="form-check-label" for="id_motMairie">Inscrit à la mairie ?</label>
+            {{ form.motMairie|add_class:"form-check-input" }}
+        </div>
+        <div class="form-check my-1">
+            <label class="form-check-label" for="id_carteDonnee">Carte donnée ?</label>
+            {{ form.carteDonnee|add_class:"form-check-input" }}
+        </div>
+        <div class="form-check my-1">
+            <label class="form-check-label" for="id_presenceDistribution">Serez-vous présent aux distributions chaque samedi ?</label>
+            {{ form.presenceDistribution|add_class:"form-check-input" }}
+        </div>
+        <div class="form-floating my-2">
+            {% render_field form.remarque class="form-control" height="100px" %}
+            <label for="id_remarque">Des remarques ?</label>
+        </div>
+    <button class="btn btn-primary" type="submit">Faire une demande</button>
+ </form>

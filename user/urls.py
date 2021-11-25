@@ -5,6 +5,7 @@ from django.urls.conf import include
 from . import views
 
 urlpatterns = [
-    path('show/', views.show, name='show'),
+    path('', views.show_unconfirmed, name='show_unconfirmed'),
+    path('<int:page>', views.show_unconfirmed, name='show_unconfirmed'),
     path('register/', views.register, name='register')
 ]

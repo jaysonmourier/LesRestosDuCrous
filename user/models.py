@@ -3,7 +3,7 @@ from django.db import models
 class Beneficiaire(models.Model):
     prenom = models.CharField(max_length=30)
     nom = models.CharField(max_length=30)
-    email = models.EmailField(max_length=255)
+    email = models.EmailField(max_length=255, unique=True)
     telephone = models.CharField(max_length=10)
     adresse = models.CharField(max_length=30)
     NBPARTS_CHOICES = [
@@ -17,5 +17,5 @@ class Beneficiaire(models.Model):
     motMairie = models.BooleanField()
     carteDonnee = models.BooleanField()
     presenceDistribution = models.BooleanField()
-    remarque = models.CharField(max_length=255)
+    remarque = models.TextField(max_length=255, null=True)
     validated = models.BooleanField(default=0)

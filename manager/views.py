@@ -3,10 +3,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm 
+from user.models import Beneficiaire
 
 @login_required(redirect_field_name=None)
 def index(request):
-    return render(request, "manager/index.html")
+    count = Beneficiaire.objects.all().filter(validated=0).count()
+    return render(request, "manager/index.html", {"count": count})
 
 def loginPage(request):
 

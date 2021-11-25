@@ -6,8 +6,6 @@
 
 {% block body %}
 
-
-
 <div class="container py-3">
 
     {% include 'manager/include/header.html' %}
@@ -16,8 +14,8 @@
         <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">Accepter les bénéficiaires</h1>
             <p class="col-md-8 fs-4">Pour valider la demande de bénéficiaire, il faut qu'un administrateur confirme manuellement la demande. Pour cela, cliquez sur le boutton ci-dessous.</p>
-            <p>Il y a actuellement 2 demandes en attente.</p>
-            <button class="btn btn-primary btn-lg" type="button">Voir les demandes</button>
+            <p>Il y a actuellement {{ count }} demande{% if count > 1 %}s{% endif %} en attente.</p>
+            <a href="/user/"><button class="btn btn-primary btn-lg" type="button">Voir les demandes</button></a>
         </div>
     </div>
 
