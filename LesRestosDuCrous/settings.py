@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'manager',
     'user',
     'categorie',
-    'product'
+    'product',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

@@ -10,74 +10,23 @@
 
     {% include 'manager/include/header.html' %}
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-    </svg>
-    Ajouter une catégorie
-    </button>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <form action="/categorie/" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter une catégorie</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                <div class="form-group">
-                    <label for="id_nom">Nom de la catégorie</label>
-                    {{ form.nom }}
-                </div>        
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="submit" class="btn btn-primary">Sauvegarder</button>
-            </div>
-            </div>
-        </div>
-            </form>
-    </div>
+    {% include 'categorie/include/modal.html' %}
 
     <div class="categories_show my-5">
+    
     {% if count < 1 %}
     <p class="text-muted text-center">
-    Il n'y a aucune catégorie disponible.
-    </p>
+        Il n'y a aucune catégorie disponible.
+    </p>    
+    
     {% else %}
-    {% include 'categorie/include/table.html' %}
-    {% endif %}
+    {% include 'categorie/include/table.html'   %}
+    {% endif %}                 
+    
     </div>
 
-    {% if page_obj.has_next or page_obj.has_previous %}
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="/categorie/{{ page_obj.previous_page_number }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                    </svg>
-                </a>
-            </li>
-            {% endif %}
+    {% include 'categorie/include/pagination.html' %}
 
-            {% if page_obj.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="/categorie/{{ page_obj.next_page_number }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                    </svg>
-                </a>
-            </li>
-            {% endif %}
-            
-        </ul>
-    </nav>
-    {% endif %}
 </div>
 
 {% include 'polls/include/footer.html' %}
