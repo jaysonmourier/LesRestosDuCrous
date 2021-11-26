@@ -3,8 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.core.paginator import Paginator
 
-from .forms import CategorieForm
+from .forms import CategorieForm, UpdateCategorie
 from .models import Categorie
+
+def _getCategorieOrRedirect(id):
+    try:
+        categorie = Categorie.objects.get(id=id)
+    except:
+        return None
+    return categorie
 
 @login_required(redirect_field_name=None)
 def delete(request, id):
@@ -35,3 +42,21 @@ def index(request, page=1):
     page_obj = paginator.get_page(page)
 
     return render(request, "categorie/index.html", {"form": categorieForm, "page_obj": page_obj, "count": paginator.count})
+
+@login_required(redirect_field_name=None)
+def update(request, id):
+    if request.method == "POST":
+        categorie = _getCategorieOrRedirect(id)
+        if categorie == None: return redirect("/categorie/")
+        categorieForm = UpdateCategorie(request.POST, instance=categorie)
+        if categorieForm.is_valid():
+            categorie.nom = categorieForm.cleaned_data['nom']
+            categorie.save()
+            return redirect("/categorie/")
+
+    else:
+        categorie = _getCategorieOrRedirect(id)
+        if categorie == None: return redirect("/categorie/")
+        productForm = UpdateCategorie(instance=categorie)
+
+    return render(request, "categorie/update.html", {"form": productForm, "id": id})

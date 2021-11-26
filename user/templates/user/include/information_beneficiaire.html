@@ -22,13 +22,13 @@
 </table>
 
 {% if beneficiaire.motMairie %}
-<p>{{ beneficiaire.prenom }} est inscrit à la mairie.</p>
+<p>{{ beneficiaire.prenom }} est inscrit.e à la mairie.</p>
 {% endif %}
 
 {% if beneficiaire.presenceDistribution %}
-<p>{{ beneficiaire.prenom }} sera présent aux distributions le samedi.</p>
+<p>{{ beneficiaire.prenom }} sera présent.e aux distributions le samedi.</p>
 {% else %}
-<p>{{ beneficiaire.prenom }} ne sera pas présent aux distributions le samedi.</p>
+<p>{{ beneficiaire.prenom }} ne sera pas présent.e aux distributions le samedi.</p>
 {% endif %}
 
 {% if beneficiaire.carteDonnee %}

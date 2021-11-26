@@ -12,7 +12,7 @@
     {% for product in products_obj %}
     <tr>
         <td><img src="{{ product.image }}" width="50" heigth="50"></td>
-        <td>{{ product.nom }}</td>
+        <td {% if product.uniteStock < product.threshold %}style="color:red;"{% endif %}>{{ product.nom }}</td>
         <td>{{ product.uniteStock }}</td>
         <td>{{ product.categorie }}</td>
         <td>

@@ -71,7 +71,7 @@ def confirm(request, id):
         beneficiaire = Beneficiaire.objects.get(id=id)
         beneficiaire.validated = True
         beneficiaire.save()
-        return redirect("/user/all")
+        return redirect("/user/")
     except:
         # TO DO : USER NOT FOUND
         beneficiaire = None

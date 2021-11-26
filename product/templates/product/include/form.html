@@ -1,0 +1,30 @@
+<form action="/product/update/{{ id }}" method="POST">
+    {% load widget_tweaks %}
+    {% csrf_token %}
+        <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modifier un produit</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group my-1">
+                    <label for="id_nom">Nom du produit</label>
+                    {{ form.nom|add_class:"form-control" }}
+                </div>
+                <div class="form-group my-1">
+                    <label for="id_categorie">Quantité</label>
+                    {{ form.uniteStock|add_class:"form-control" }}
+                </div>
+                <div class="form-group my-1">
+                    <label for="id_categorie">Seuil d'alerte</label>
+                    {{ form.threshold|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/product/"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button></a>
+                <button type="submit" class="btn btn-primary">Sauvegarder</button>
+            </div>
+            </div>
+        </div>
+    </form>

@@ -2,9 +2,16 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 
-from .models import Product
 from categorie.models import Categorie
-from .forms import ProductForm
+from .models import Product
+from .forms import ProductForm, ProductUpdateForm
+
+def _getProductOrRedirect(id):
+    try:
+        product = Product.objects.get(id=id)
+    except:
+        return None
+    return product
 
 @login_required(redirect_field_name=None)
 def index(request, page=1):
@@ -47,3 +54,23 @@ def delete(request, id):
     # delete product
     product.delete()
     return redirect(f"/product/")
+
+@login_required(redirect_field_name=None)
+def update(request, id):
+    if request.method == "POST":
+        product = _getProductOrRedirect(id)
+        if product == None: return redirect("/product/")
+        productForm = ProductUpdateForm(request.POST, instance=product)
+        if productForm.is_valid():
+            product.nom = productForm.cleaned_data['nom']
+            product.uniteStock = productForm.cleaned_data['uniteStock']
+            product.threshold = productForm.cleaned_data['threshold']
+            product.save()
+            return redirect("/product/")
+
+    else:
+        product = _getProductOrRedirect(id)
+        if product == None: return redirect("/product/")
+        productForm = ProductUpdateForm(instance=product)
+
+    return render(request, "product/update.html", {"form": productForm, "test": "salut", "id": id})
